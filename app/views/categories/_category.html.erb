@@ -1,0 +1,11 @@
+<tr>
+    <td><%= check_box_tag "category_ids[]", category.id %></td>
+    <td><%= category.id %></td>
+    <td><%= category.name %></td>
+    <td>
+    	<span class="text-success"><%= category.activated %></span>
+    </td>
+    <td><%= category.created_at %></td>
+    <td><%= category.updated_at %></td>
+    <td><a href="<%= edit_category_path(category) %>" class="btn btn-info">Edit</a></td>
+</tr>

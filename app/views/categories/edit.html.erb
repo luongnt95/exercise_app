@@ -5,7 +5,7 @@
 
         <ul class="breadcrumb">
             <li><a href="list-categories.html">List Categories</a> <span class="divider">></span></li>
-            <li class="active">Add</li>
+            <li class="active">Edit</li>
         </ul>
 
     </div>
@@ -22,8 +22,10 @@
                     <div class="clear"></div>
                 </div>
                 <div class="block-fluid">
+
                     <%= form_for @category do |f| %>
-                        <div class="row-form">
+
+                    	<div class="row-form">
                             <div class="span3">Category Name:</div>
                             <div class="span9">
                                 <%= f.text_field :name, placeholder: "some text value..." %>
@@ -33,16 +35,19 @@
                         <div class="row-form">
                             <div class="span3">Activate:</div>
                             <div class="span9">
-                                <%= f.select(:activated, [['choose an option...', 'NULL'], ['Activate', 'Activated'], 
-                                                           ['Deactivate', 'Deactivated']]) %>
+                                <%= f.select(:activated, [['choose an option...', 'null'], 
+                                                          ['Activate', 'Activated'], 
+                                                          ['Deactivate', 'Deactivated']]) %>
                             </div>
                             <div class="clear"></div>
                         </div>                          
                         <div class="row-form">
-                            <%= f.submit "Create", class: "btn btn-success" %>
-                            <div class="clear"></div>
+                            <%= f.submit "Update", class: "btn btn-success" %>
+							<div class="clear"></div>
                         </div>
+
                     <% end %>
+
                     <div class="clear"></div>
                 </div>
             </div>

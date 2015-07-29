@@ -4,7 +4,7 @@
     <div class="breadLine">
 
         <ul class="breadcrumb">
-            <li><a href="list-categories.html">List Categories</a></li>
+            <li><a href="<%= categories_path %>">List Categories</a></li>
         </ul>
 
     </div>
@@ -32,115 +32,38 @@
                 </div>
                 <div class="block-fluid table-sorting">
                     <a href="<%= new_category_path %>" class="btn btn-add">Add Category</a>
-                    <table cellpadding="0" cellspacing="0" width="100%" class="table" id="tSortable_2">
-                        <thead>
-                        <tr>
-                            <th><input type="checkbox" id="checkAll"/></th>
-                            <th width="15%" class="sorting"><a href="#">ID</a></th>
-                            <th width="35%" class="sorting"><a href="#">Category Name</a></th>
-                            <th width="20%" class="sorting"><a href="#">Activate</a></th>
-                            <th width="10%" class="sorting"><a href="#">Time Created</a></th>
-                            <th width="10%" class="sorting"><a href="#">Time Updated</a></th>
-                            <th width="10%">Action</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td><input type="checkbox" name="checkbox"/></td>
-                            <td>1</td>
-                            <td>Category 1</td>
-                            <td><span class="text-success">Activated</span></td>
-                            <td>15:00 05/10/2014</td>
-                            <td>15:00 05/10/2014</td>
-                            <td><a href="<%= edit_category_path %>" class="btn btn-info">Edit</a></td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox" name="checkbox"/></td>
-                            <td>2</td>
-                            <td>Category 2</td>
-                            <td><span class="text-success">Activated</span></td>
-                            <td>15:00 05/10/2014</td>
-                            <td>15:00 05/10/2014</td>
-                            <td><a href="edit-category.html" class="btn btn-info">Edit</a></td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox" name="checkbox"/></td>
-                            <td>3</td>
-                            <td>Category 3</td>
-                            <td><span class="text-success">Activated</span></td>
-                            <td>15:00 05/10/2014</td>
-                            <td>15:00 05/10/2014</td>
-                            <td><a href="edit-category.html" class="btn btn-info">Edit</a></td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox" name="checkbox"/></td>
-                            <td>4</td>
-                            <td>Category 4</td>
-                            <td><span class="text-success">Activated</span></td>
-                            <td>15:00 05/10/2014</td>
-                            <td>15:00 05/10/2014</td>
-                            <td><a href="edit-category.html" class="btn btn-info">Edit</a></td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox" name="checkbox"/></td>
-                            <td>5</td>
-                            <td>Category 6</td>
-                            <td><span class="text-error">Deactivate</span></td>
-                            <td>15:00 05/10/2014</td>
-                            <td>15:00 05/10/2014</td>
-                            <td><a href="edit-category.html" class="btn btn-info">Edit</a></td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox" name="checkbox"/></td>
-                            <td>6</td>
-                            <td>Category 6</td>
-                            <td><span class="text-success">Activated</span></td>
-                            <td>15:00 05/10/2014</td>
-                            <td>15:00 05/10/2014</td>
-                            <td><a href="edit-category.html" class="btn btn-info">Edit</a></td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox" name="checkbox"/></td>
-                            <td>7</td>
-                            <td>Category 7</td>
-                            <td><span class="text-error">Deactivate</span></td>
-                            <td>15:00 05/10/2014</td>
-                            <td>15:00 05/10/2014</td>
-                            <td><a href="edit-category.html" class="btn btn-info">Edit</a></td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox" name="checkbox"/></td>
-                            <td>8</td>
-                            <td>Category 8</td>
-                            <td><span class="text-success">Activated</span></td>
-                            <td>15:00 05/10/2014</td>
-                            <td>15:00 05/10/2014</td>
-                            <td><a href="edit-category.html" class="btn btn-info">Edit</a></td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox" name="checkbox"/></td>
-                            <td>9</td>
-                            <td>Category 9</td>
-                            <td><span class="text-error">Deactivate</span></td>
-                            <td>15:00 05/10/2014</td>
-                            <td>15:00 05/10/2014</td>
-                            <td><a href="edit-category.html" class="btn btn-info">Edit</a></td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox" name="checkbox"/></td>
-                            <td>10</td>
-                            <td>Category 10</td>
-                            <td><span class="text-success">Activated</span></td>
-                            <td>15:00 05/10/2014</td>
-                            <td>15:00 05/10/2014</td>
-                            <td><a href="edit-category.html" class="btn btn-info">Edit</a></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <div class="bulk-action">
-                        <a href="#" class="btn btn-success">Activate</a>
-                        <a href="#" class="btn btn-danger">Delete</a>
-                    </div><!-- /bulk-action-->
+
+
+                    <%= form_tag 'categories/bulk_action' do %>
+
+                        <table cellpadding="0" cellspacing="0" width="100%" class="table" id="tSortable_2">
+                            <thead>
+                            <tr>
+                                <th><%= check_box_tag "check_all", '1' %></th>
+                                <th width="15%" class="sorting"><a href="#">ID</a></th>
+                                <th width="35%" class="sorting"><a href="#">Category Name</a></th>
+                                <th width="20%" class="sorting"><a href="#">Activate</a></th>
+                                <th width="10%" class="sorting"><a href="#">Time Created</a></th>
+                                <th width="10%" class="sorting"><a href="#">Time Updated</a></th>
+                                <th width="10%">Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            <%= render @categories %>
+
+                            </tbody>
+                        </table>
+
+
+                        <div class="bulk-action">
+                            <%= submit_tag "Activate", class: "btn btn-success" %>
+                            <%= submit_tag "Delete", class: "btn btn-danger" %>
+                        </div><!-- /bulk-action-->
+
+                    <% end %>
+
+
                     <div class="dataTables_paginate">
                         <a class="first paginate_button paginate_button_disabled" href="#">First</a>
                         <a class="previous paginate_button paginate_button_disabled" href="#">Previous</a>

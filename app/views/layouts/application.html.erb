@@ -15,8 +15,11 @@
   <link href="css/stylesheets.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-	<%= render 'layouts/header' %>
-	<%= render 'layouts/menu' %>
+
+	<% if logged_in? %>
+		<%= render 'layouts/header' %>
+		<%= render 'layouts/menu' %>
+	<% end %>
 	
 	<% flash.each do |message_type, message| %>
 		<div class="alert alert-<%= message_type %>">
