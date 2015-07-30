@@ -1,9 +1,10 @@
 class CategoriesController < ApplicationController
-
-	def index
-		@categories = Category.all
-	end
-
+ 	helper_method :sort_column, :sort_direction
+  	
+  	def index
+    	@categories = Category.order(sort_column + ' ' + sort_direction)
+    	@categories = @categories.paginate(page: params[:page]).per_page(5)
+  	end
 	def new
 		@category = Category.new
 	end
@@ -48,24 +49,30 @@ class CategoriesController < ApplicationController
 		end
 
 		def delete_categories
-			if params[:check_all] == '1'
-				@categories = Category.all
-			else
-				@categories = Category.find(params[:category_ids])
-			end
-			@categories.each do |category|
+			checked_categories.each do |category|
 				category.destroy
 			end
 		end
 
 		def update_activates
-			if params[:check_all] == '1'
+			checked_categories.each do |category|
+				category.update_attribute(:activated, 'Activate')
+			end
+		end
+
+		def sort_column
+    		Category.column_names.include?(params[:sort]) ? params[:sort] : "id"
+  		end
+  
+  		def sort_direction
+    		%w[asc desc].include?(params[:direction]) ?  params[:direction] : "asc"
+  		end
+
+  		def checked_categories
+  			if params[:check_all] == '1'
 				@categories = Category.all
 			else
 				@categories = Category.find(params[:category_ids])
 			end
-			@categories.each do |category|
-				category.update_attribute(:activated, 'Activate')
-			end
-		end
+  		end
 end

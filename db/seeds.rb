@@ -9,3 +9,9 @@
 User.create!(name:  "luong",
              password:              "123456",
              password_confirmation: "123456")
+
+20.times do |n|
+  name  = Faker::Name.name
+  Category.create!(name: name,
+              activated: "Deactivated")
+end

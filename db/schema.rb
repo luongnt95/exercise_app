@@ -14,10 +14,10 @@
 ActiveRecord::Schema.define(version: 20150728022650) do
 
   create_table "categories", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string   "activated"
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.string   "activated",  limit: 255
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -26,11 +26,11 @@ ActiveRecord::Schema.define(version: 20150728022650) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "name"
-    t.string   "password_digest"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.string   "remember_digest"
+    t.string   "name",            limit: 255
+    t.string   "password_digest", limit: 255
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.string   "remember_digest", limit: 255
   end
 
 end
