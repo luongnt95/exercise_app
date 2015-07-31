@@ -50,7 +50,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            
+    
                             <%= render @categories %>
                             
                             </tbody>
@@ -65,7 +65,7 @@
                     <% end %>
 
 
-                    <div class="dataTables_paginate">
+                    <!-- <div class="dataTables_paginate">
                         <a class="first paginate_button paginate_button_disabled" href="#">First</a>
                         <a class="previous paginate_button paginate_button_disabled" href="#">Previous</a>
                         <span>
@@ -74,9 +74,15 @@
                         </span>
                         <a class="next paginate_button" href="#">Next</a>
                         <a class="last paginate_button" href="#">Last</a>
-                    </div>
+                    </div> -->
 
-                    <%= will_paginate %>
+                    <div class="dataTables_paginate">
+                            <%= link_to "First", { action: 'index', page: 1 }, { class: "first paginate_button" } %>
+                            <%= pagination_links @categories %>
+                            <%= link_to "Last", { action: 'index', page: @total_pages }, { class: "last paginate_button" } %>
+                    </div>
+                    
+                    
 
                     <div class="clear"></div>
                 </div>

@@ -8,9 +8,11 @@ module ApplicationHelper
   	end
 
   	def pagination_links(collection, options = {})
-   		options[:renderer] ||= BootstrapPaginationHelper::LinkRenderer
+   		options[:renderer] ||= ApplicationHelper::LinkRenderer
    		options[:inner_window] ||= 2
    		options[:outer_window] ||= 1
+   		options[:previous_label] = 'Previous'
+   		options[:next_label] = 'Next'
    		will_paginate(collection, options)
  	end
 
@@ -19,9 +21,9 @@ module ApplicationHelper
 
       		def page_number(page)
         		unless page == current_page
-         	 		link(page, page, :rel => rel_value(page))
+         	 		link(page, page, :class => 'paginate_button', :rel => rel_value(page))
         		else
-          			link(page, "#", :class => 'active')
+          			link(page, "#", :class => 'paginate_active')
         		end
       		end
 
@@ -32,19 +34,19 @@ module ApplicationHelper
 
 	      	def next_page
 	        	num = @collection.current_page < @collection.total_pages && @collection.current_page + 1
-	        	previous_or_next_page(num, @options[:next_label], 'next')
+	        	previous_or_next_page(num, @options[:next_label], '')
 	      	end
 
 	      	def previous_or_next_page(page, text, classname)
 	        	if page
-	          		link(text, page, :class => classname)
+	          		link(text, page, :class => 'paginate_button')
 	        	else
-	          		link(text, "#", :class => classname + ' disabled')
+	          		link(text, "#", :class => 'paginate_button_disabled')
 	        	end
 	      	end
 
       		def html_container(html)
-        		tag(:div, tag(:ul, html), container_attributes)
+        		tag(:div, html, container_attributes)
       		end
     
     	private
@@ -58,9 +60,9 @@ module ApplicationHelper
 	            unless target == "#"
 	                attributes[:href] = target
 	            end
-	        	classname = attributes[:class]
-	        	attributes.delete(:classname)
-	        	tag(:li, tag(:a, text, attributes), :class => classname)
+
+	        	tag(:a, text, attributes)
+
 	        end
     end
 end

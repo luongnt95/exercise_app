@@ -3,8 +3,10 @@ class CategoriesController < ApplicationController
   	
   	def index
     	@categories = Category.order(sort_column + ' ' + sort_direction)
-    	@categories = @categories.paginate(page: params[:page]).per_page(5)
+    	@categories = @categories.paginate(page: params[:page], per_page: 5)
+    	@total_pages = @categories.total_pages
   	end
+  	
 	def new
 		@category = Category.new
 	end
