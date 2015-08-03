@@ -19,16 +19,12 @@
 	<% if logged_in? %>
 		<%= render 'layouts/header' %>
 		<%= render 'layouts/menu' %>
+	<% else %>
+		<%= render 'layouts/flash' %>
 	<% end %>
-	
-	<% flash.each do |message_type, message| %>
-		<div class="alert alert-<%= message_type %>">
-			<%= message %>
-		</div>
-	<% end %>
-	<div class="container">
-		<%= yield %>
-	</div>
+
+	<%= yield %>
+
 
 </body>
 </html>

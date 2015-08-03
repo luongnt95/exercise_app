@@ -1,9 +1,15 @@
 <tr>
-	<td><%= check_box_tag "product_ids", product.id %></td>
+	<td><%= check_box_tag "product_ids[]", product.id %></td>
 	<td><%= product.id %></td>
 	<td><%= product.name %></td>
 	<td><%= "#{product.price} VND" %></td>
-	<td><span class="text-success"><%= product.activation_status %></span></td>
+	<td>
+		<% if product.activated? %>
+    		<span class="text-success">Activated</span>
+    	<% else %>
+    		<span class="text-error">Deactivated</span>
+    	<% end %>
+	</td>
 	<td><%= product.created_at %></td>
 	<td><%= product.updated_at %></td>
 	<td><a href="<%= edit_product_path(product) %>" class="btn btn-info">Edit</a></td>

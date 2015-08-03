@@ -1,0 +1,19 @@
+<div class="dataTables_paginate">
+	<% if @current_page == 1 %>
+    	<%= link_to "First", { action: 'index', page: 1 },
+    					 { class: "first paginate_button_disabled" } %>
+    <% else %>
+    	<%= link_to "First", { action: 'index', page: 1 },
+    					 { class: "first paginate_button" } %>
+    <% end %>
+    
+    <%= pagination_links object %>
+    
+    <% if @current_page == @total_pages %>
+    	<%= link_to "Last", { action: 'index', page: @total_pages },
+    					 	{ class: "first paginate_button_disabled" } %>
+    <% else %>
+    	<%= link_to "Last", { action: 'index', page: @total_pages }, 
+    				    	{ class: "last paginate_button" } %>
+    <% end %>
+</div>

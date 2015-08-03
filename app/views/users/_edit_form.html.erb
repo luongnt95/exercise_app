@@ -1,0 +1,38 @@
+<%= form_for @user, html: { multipart: true } do |f| %>
+    <div class="row-form">
+        <div class="span3">Username:</div>
+        <div class="span9"><%= f.text_field :name, placeholder: "some text value..." %></div>
+        <div class="clear"></div>
+    </div> 
+    <div class="row-form">
+        <div class="span3">Email:</div>
+        <div class="span9"><%= f.email_field :email, placeholder: "some text value..." %></div>
+        <div class="clear"></div>
+    </div> 
+    <div class="row-form">
+        <div class="span3">Password:</div>
+        <div class="span9"><%= f.text_field :password, placeholder: "some text value..." %></div>
+        <div class="clear"></div>
+    </div> 
+    <div class="row-form">
+        <div class="span3">Upload Avatar:</div>
+        <div class="span9">
+            <%= image_tag @user.avatar.url(:thumb) %>
+            <%= f.file_field :avatar, size: 19 %>
+        </div>
+        <div class="clear"></div>
+    </div> 
+    <div class="row-form">
+        <div class="span3">Activate:</div>
+        <div class="span9">
+            <%= f.select(:activated, [['choose an option...', nil], 
+                                      ['Activate', true], 
+                                      ['Deactivate', false]]) %>
+        </div>
+        <div class="clear"></div>
+    </div>                          
+    <div class="row-form">
+        <%= f.submit "Create", class: "btn btn-success" %>
+        <div class="clear"></div>
+    </div>
+<% end %>

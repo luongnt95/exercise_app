@@ -4,6 +4,7 @@ class CreateProducts < ActiveRecord::Migration
       t.string :name
       t.float :price
       t.boolean :activated
+      t.text :description
 
       t.timestamps null: false
     end

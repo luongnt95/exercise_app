@@ -1,0 +1,29 @@
+<%= form_for @category do |f| %>
+
+    <div class="row-form">
+        <div class="span3">Category Name:</div>
+        <div class="span9">
+            <%= f.text_field :name, placeholder: "some text value...", class: "form-control" %>
+            <% if !@category.errors[:name].empty? %>
+                <li id="name-error"><%= @category.errors[:name] %></li>
+            <% end %>
+        </div>
+        <div class="clear"></div>
+    </div> 
+    <div class="row-form">
+        <div class="span3">Activate:</div>
+        <div class="span9">
+            <%= f.select(:activated, [['choose an option...', nil], 
+                                      ['Activate', true], 
+                                      ['Deactivate', false]]) %>
+            <% if !@category.errors[:activated].empty? %>
+                <li id="activated-error"><%= @category.errors[:activated] %></li>
+            <% end %>
+        </div>
+        <div class="clear"></div>
+    </div>                          
+    <div class="row-form">
+        <%= f.submit "Create", class: "btn btn-success" %>
+        <div class="clear"></div>
+    </div>
+<% end %>

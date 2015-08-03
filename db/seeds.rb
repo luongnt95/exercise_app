@@ -7,19 +7,34 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 User.create!(name:  "luong",
+             email: "luong@gmail.com",
+             activated: true,
+             admin: true,
              password:              "123456",
              password_confirmation: "123456")
 
 20.times do |n|
   name  = Faker::Name.name
   Category.create!(name: name,
-              activated: "Deactivated")
+              activated: false,)
 end
 
 20.times do |n|
   name  = Faker::Name.name
   Product.create!(name: name,
+  			  description: "It's so beautiful",
   			  price: 100.000,
   			  activated: false)
+end
 
+20.times do |n|
+  name  = Faker::Name.name
+  email = "example-#{n+1}@railstutorial.org"
+  password = "password"
+  User.create!(name: name,
+              email: email,
+              password:              password,
+              password_confirmation: password,
+              activated: false,
+              admin: false)
 end

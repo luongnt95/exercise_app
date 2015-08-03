@@ -32,39 +32,44 @@
                 </div>
                 <div class="block-fluid table-sorting">
                     <a href="<%= new_product_path(@product) %>" class="btn btn-add">Add Product</a>
-                    <table cellpadding="0" cellspacing="0" width="100%" class="table" id="tSortable_2">
-                        <thead>
-                        <tr>
-                            <th><input type="checkbox" id="checkAll"/></th>
-                            <th width="10%" class="sorting"><a href="#">ID</a></th>
-                            <th width="30%" class="sorting"><a href="#">Product Name</a></th>
-                            <th width="15%" class="sorting"><a href="#">Price</a></th>
-                            <th width="15%" class="sorting"><a href="#">Activate</a></th>
-                            <th width="10%" class="sorting"><a href="#">Time Created</a></th>
-                            <th width="10%" class="sorting"><a href="#">Time Updated</a></th>
-                            <th width="10%">Action</th>
-                        </tr>
-                        </thead>
-                        <tbody>
 
-                        <%= render @products %>
-                        
-                        </tbody>
-                    </table>
-                    <div class="bulk-action">
-                        <a href="#" class="btn btn-success">Activate</a>
-                        <a href="#" class="btn btn-danger">Delete</a>
-                    </div><!-- /bulk-action-->
-                    <div class="dataTables_paginate">
-                        <a class="first paginate_button paginate_button_disabled" href="#">First</a>
-                        <a class="previous paginate_button paginate_button_disabled" href="#">Previous</a>
-                        <span>
-                            <a class="paginate_active" href="#">1</a>
-                            <a class="paginate_button" href="#">2</a>
-                        </span>
-                        <a class="next paginate_button" href="#">Next</a>
-                        <a class="last paginate_button" href="#">Last</a>
-                    </div>
+                    <% if !is_empty?(Product) %>
+                        <%= form_tag bulk_action_products_path do %>
+
+                            <table cellpadding="0" cellspacing="0" width="100%" class="table" id="tSortable_2">
+                                <thead>
+                                <tr>
+                                    <th><%= check_box_tag "check_all", true %></th>
+                                    <th width="10%" class="sorting"><a href="#">ID</a></th>
+                                    <th width="30%" class="sorting"><a href="#">Product Name</a></th>
+                                    <th width="15%" class="sorting"><a href="#">Price</a></th>
+                                    <th width="15%" class="sorting"><a href="#">Activate</a></th>
+                                    <th width="10%" class="sorting"><a href="#">Time Created</a></th>
+                                    <th width="10%" class="sorting"><a href="#">Time Updated</a></th>
+                                    <th width="10%">Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                <%= render @products %>
+                                
+                                </tbody>
+                            </table>
+                            <div class="bulk-action">
+                                <%= submit_tag "Activate", class: "btn btn-success" %>
+                                <%= submit_tag "Delete", class: "btn btn-danger" %>
+                            </div><!-- /bulk-action-->
+                            <div class="dataTables_paginate">
+                                
+                                <% if @total_pages != 1 %>
+                                    <%= render 'layouts/pagination', object: @products %>
+                                <% end %>
+
+                            </div>
+
+                        <% end %>
+                    <% end %>
+
                     <div class="clear"></div>
                 </div>
             </div>

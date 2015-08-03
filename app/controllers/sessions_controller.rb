@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
 
 	def create
 		user = User.find_by(name: params[:session][:name])
-		if user && user.authenticate(params[:session][:password])
+		if user && user.admin? && user.authenticate(params[:session][:password])
 			log_in user
 			remember user if params[:session][:remember_me] == '1'
 			redirect_to categories_url
@@ -17,7 +17,10 @@ class SessionsController < ApplicationController
 	end
 
 	def destroy
-		log_out if logged_in?
+		if logged_in?
+			flash[:success] = "Log out Succesfully"
+			log_out
+		end
 		redirect_to root_url
 	end
 end

@@ -1,0 +1,26 @@
+<%= form_for @category do |f| %>
+
+    <%= render 'shared/error_messages', object: f.object %>
+
+    <div class="row-form">
+        <div class="span3">Category Name:</div>
+        <div class="span9">
+            <%= f.text_field :name, placeholder: "some text value..." %>
+        </div>
+        <div class="clear"></div>
+    </div> 
+    <div class="row-form">
+        <div class="span3">Activate:</div>
+        <div class="span9">
+            <%= f.select(:activated, [['choose an option...', nil], 
+                                      ['Activate', true], 
+                                      ['Deactivate', false]]) %>
+        </div>
+        <div class="clear"></div>
+    </div>                          
+    <div class="row-form">
+        <%= f.submit "Update", class: "btn btn-success" %>
+		<div class="clear"></div>
+    </div>
+
+<% end %>

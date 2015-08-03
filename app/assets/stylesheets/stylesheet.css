@@ -609,3 +609,15 @@
 .pagination {
     display: inline;
 }
+
+.image-render {
+    display: inline-block;
+}
+
+#name-error {
+    color: red;
+}
+
+#activated-error {
+    color: red;
+}

@@ -5,12 +5,18 @@ Rails.application.routes.draw do
   delete 'logout'          => 'sessions#destroy'
 
   resources :users
-  resources :products
+  resources :product_pictures, only: [:destroy]
 
   resources :categories do
   	collection do
   		post 'bulk_action'
   	end
+  end
+
+  resources :products do
+    collection do
+      post 'bulk_action'
+    end
   end
 
 end

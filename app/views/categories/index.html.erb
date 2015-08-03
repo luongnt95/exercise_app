@@ -1,5 +1,6 @@
 <div class="content">
 
+    <%= render 'layouts/flash' %>
 
     <div class="breadLine">
 
@@ -34,35 +35,38 @@
                 <div class="block-fluid table-sorting">
                     <a href="<%= new_category_path %>" class="btn btn-add">Add Category</a>
 
+                    <% if !is_empty?(Category) %>
 
-                    <%= form_tag bulk_action_categories_path do %>
+                        <%= form_tag bulk_action_categories_path do %>
 
-                        <table cellpadding="0" cellspacing="0" width="100%" class="table" id="tSortable_2">
-                            <thead>
-                            <tr>
-                                <th><%= check_box_tag "check_all", '1' %></th>
-                                <th width="15%" class="sorting"><%= sortable "id" %></th>
-                                <th width="35%" class="sorting"><%= sortable "name", "Category Name" %></th>
-                                <th width="20%" class="sorting"><a href="#">Activate</a></th>
-                                <th width="10%" class="sorting"><%= sortable "created_at" %></th>
-                                <th width="10%" class="sorting"><%= sortable "updated_at" %></th>
-                                <th width="10%">Action</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-    
-                            <%= render @categories %>
-                            
-                            </tbody>
-                        </table>
+                            <%= hidden_field_tag :current_page, @current_page %>
+
+                            <table cellpadding="0" cellspacing="0" width="100%" class="table" id="tSortable_2">
+                                <thead>
+                                <tr>
+                                    <th><%= check_box_tag "check_all", true %></th>
+                                    <th width="15%" class="sorting"><%= sortable "id", "ID", @current_page %></th>
+                                    <th width="35%" class="sorting"><%= sortable "name", "Category Name", @current_page %></th>
+                                    <th width="20%" class="sorting"><%= sortable "activated", "Activate", @current_page %></th>
+                                    <th width="10%" class="sorting"><%= sortable "created_at", "Time Created", @current_page %></th>
+                                    <th width="10%" class="sorting"><%= sortable "updated_at", "Time Updated", @current_page %></th>
+                                    <th width="10%">Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+        
+                                <%= render @categories %>
+                                
+                                </tbody>
+                            </table>
 
 
-                        <div class="bulk-action">
-                            <%= submit_tag "Activate", class: "btn btn-success" %>
-                            <%= submit_tag "Delete", class: "btn btn-danger" %>
-                        </div><!-- /bulk-action-->
+                            <div class="bulk-action">
+                                <%= submit_tag "Activate", class: "btn btn-success" %>
+                                <%= submit_tag "Delete", class: "btn btn-danger" %>
+                            </div><!-- /bulk-action-->
 
-                    <% end %>
+                        <% end %>
 
 
                     <!-- <div class="dataTables_paginate">
@@ -75,13 +79,10 @@
                         <a class="next paginate_button" href="#">Next</a>
                         <a class="last paginate_button" href="#">Last</a>
                     </div> -->
-
-                    <div class="dataTables_paginate">
-                            <%= link_to "First", { action: 'index', page: 1 }, { class: "first paginate_button" } %>
-                            <%= pagination_links @categories %>
-                            <%= link_to "Last", { action: 'index', page: @total_pages }, { class: "last paginate_button" } %>
-                    </div>
-                    
+                        <% if @total_pages != 1 %>
+                            <%= render 'layouts/pagination', object: @categories %>
+                        <% end %>
+                    <% end %>
                     
 
                     <div class="clear"></div>

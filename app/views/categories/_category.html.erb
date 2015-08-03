@@ -3,7 +3,11 @@
     <td><%= category.id %></td>
     <td><%= category.name %></td>
     <td>
-    	<span class="text-success"><%= category.activated %></span>
+    	<% if category.activated? %>
+    		<span class="text-success">Activated</span>
+    	<% else %>
+    		<span class="text-error">Deactivated</span>
+    	<% end %>
     </td>
     <td><%= category.created_at %></td>
     <td><%= category.updated_at %></td>
