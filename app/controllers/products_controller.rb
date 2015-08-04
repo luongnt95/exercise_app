@@ -9,6 +9,9 @@ class ProductsController < ApplicationController
     @current_page = @products.current_page
   end
 
+  def show
+  end
+
   def new
   	@product = Product.new
   end

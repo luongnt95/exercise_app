@@ -614,10 +614,6 @@
     display: inline-block;
 }
 
-#name-error {
-    color: red;
-}
-
-#activated-error {
+.validate-error {
     color: red;
 }

@@ -1,82 +1,27 @@
-<div class="content">
+<% provide(:type, "Products") %>
+<a href="<%= new_product_path(@product) %>" class="btn btn-add">Add Product</a>
 
-
-    <div class="breadLine">
-
-        <ul class="breadcrumb">
-            <li><a href="list-products.html">List Products</a></li>
-        </ul>
-
-    </div>
-
-    <div class="workplace">
-
-        <div class="row-fluid">
-            <div class="span12 search">
-                <form>
-                    <input type="text" class="span11" placeholder="Some text for search..." name="search"/>
-                    <button class="btn span1" type="submit">Search</button>
-                </form>
-            </div>
-        </div>
-        <!-- /row-fluid-->
-
-        <div class="row-fluid">
-
-            <div class="span12">
-                <div class="head">
-                    <div class="isw-grid"></div>
-                    <h1>Products Management</h1>
-
-                    <div class="clear"></div>
-                </div>
-                <div class="block-fluid table-sorting">
-                    <a href="<%= new_product_path(@product) %>" class="btn btn-add">Add Product</a>
-
-                    <% if !is_empty?(Product) %>
-                        <%= form_tag bulk_action_products_path do %>
-
-                            <table cellpadding="0" cellspacing="0" width="100%" class="table" id="tSortable_2">
-                                <thead>
-                                <tr>
-                                    <th><%= check_box_tag "check_all", true %></th>
-                                    <th width="10%" class="sorting"><a href="#">ID</a></th>
-                                    <th width="30%" class="sorting"><a href="#">Product Name</a></th>
-                                    <th width="15%" class="sorting"><a href="#">Price</a></th>
-                                    <th width="15%" class="sorting"><a href="#">Activate</a></th>
-                                    <th width="10%" class="sorting"><a href="#">Time Created</a></th>
-                                    <th width="10%" class="sorting"><a href="#">Time Updated</a></th>
-                                    <th width="10%">Action</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-
-                                <%= render @products %>
-                                
-                                </tbody>
-                            </table>
-                            <div class="bulk-action">
-                                <%= submit_tag "Activate", class: "btn btn-success" %>
-                                <%= submit_tag "Delete", class: "btn btn-danger" %>
-                            </div><!-- /bulk-action-->
-                            <div class="dataTables_paginate">
-                                
-                                <% if @total_pages != 1 %>
-                                    <%= render 'layouts/pagination', object: @products %>
-                                <% end %>
-
-                            </div>
-
-                        <% end %>
-                    <% end %>
-
-                    <div class="clear"></div>
-                </div>
-            </div>
-
-        </div>
-        <div class="dr"><span></span></div>
-
-    </div>
-
-</div>
+<%= form_tag bulk_action_products_path do %>
+    <table cellpadding="0" cellspacing="0" width="100%" class="table" id="tSortable_2">
+        <thead>
+            <tr>
+                <th><%= check_box_tag "check_all", true %></th>
+                <th width="10%" class="sorting"><a href="#">ID</a></th>
+                <th width="30%" class="sorting"><a href="#">Product Name</a></th>
+                <th width="15%" class="sorting"><a href="#">Price</a></th>
+                <th width="15%" class="sorting"><a href="#">Activate</a></th>
+                <th width="10%" class="sorting"><a href="#">Time Created</a></th>
+                <th width="10%" class="sorting"><a href="#">Time Updated</a></th>
+                <th width="10%">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <%= render @products %>
+        </tbody>
+    </table>
+    <div class="bulk-action">
+        <%= submit_tag "Activate", class: "btn btn-success" %>
+        <%= submit_tag "Delete", class: "btn btn-danger" %>
+    </div><!-- /bulk-action-->
+<% end %>
+<%= render 'layouts/pagination', object: @products %>

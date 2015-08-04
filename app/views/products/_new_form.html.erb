@@ -2,17 +2,32 @@
 
     <div class="row-form">
         <div class="span3">Product Name:</div>
-        <div class="span9"><%= f.text_field :name, placeholder: "some text value..." %></div>
+        <div class="span9">
+            <%= f.text_field :name, placeholder: "some text value..." %>
+            <% unless @product.errors[:name].empty? %>
+                <li class="validate-error"><%= @product.errors[:name] %></li>
+            <% end %>
+        </div>
         <div class="clear"></div>
     </div> 
     <div class="row-form">
         <div class="span3">Price:</div>
-        <div class="span9"><%= f.number_field :price, placeholder: "some text value..." %></div>
+        <div class="span9">
+            <%= f.number_field :price, placeholder: "some text value..." %>
+            <% unless @product.errors[:price].empty? %>
+                <li class="validate-error"><%= @product.errors[:price] %></li>
+            <% end %>
+        </div>
         <div class="clear"></div>
     </div> 
     <div class="row-form">
         <div class="span3">Description:</div>
-        <div class="span9"><%= f.text_area :description, placeholder: "Textarea field placeholder..." %></div>
+        <div class="span9">
+            <%= f.text_area :description, placeholder: "Textarea field placeholder..." %>
+            <% unless @product.errors[:description].empty? %>
+                <li class="validate-error"><%= @product.errors[:description] %></li>
+            <% end %>
+        </div>
         <div class="clear"></div>
     </div> 
     <div class="row-form">
@@ -27,9 +42,14 @@
     <div class="row-form">
         <div class="span3">Activate:</div>
         <div class="span9">
-            <%= f.select(:activated, [['Choose an option...', nil],
-                                        ['Activate', true], 
-                                        ['Deactivate', false]]) %>
+
+            <%= f.select(:activated, [['Activate', 'activated'], 
+                                      ['Deactivate', 'deactivated']],
+                                       include_blank: 'choose an option...') %>
+            <% unless @product.errors[:activated].empty? %>
+                <li class="validate-error"><%= @product.errors[:activated] %></li>
+            <% end %>
+
         </div>
         <div class="clear"></div>
     </div>                          

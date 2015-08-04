@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>ExerciseApp</title>
+  <title>NTQ Solution Admin Control Panel</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -17,14 +17,25 @@
 <body>
 
 	<% if logged_in? %>
-		<%= render 'layouts/header' %>
-		<%= render 'layouts/menu' %>
-	<% else %>
-		<%= render 'layouts/flash' %>
-	<% end %>
+    <%= render 'layouts/header' %>
+    <%= render 'layouts/menu' %>
+  <% else %>
+    <%= render 'shared/flash' %>
+  <% end %>
 
-	<%= yield %>
-
+  <% if params[:action] == 'index' %>
+    <div class="content">
+      <%= render 'shared/flash' %>
+      <div class="breadLine">
+        <ul class="breadcrumb">
+          <li><%= path_of(yield(:type)) %></li>
+        </ul>
+      </div>
+        <%= render 'layouts/workplace' %>
+    </div>
+  <% else %>
+    <%= yield %>
+  <% end %>
 
 </body>
 </html>

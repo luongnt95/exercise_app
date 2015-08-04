@@ -2,7 +2,7 @@ class CreateCategories < ActiveRecord::Migration
   def change
     create_table :categories do |t|
       t.string :name
-      t.boolean :activated
+      t.string :activated
 
       t.timestamps null: false
     end

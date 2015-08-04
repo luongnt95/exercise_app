@@ -16,7 +16,7 @@ User.create!(name:  "luong",
 20.times do |n|
   name  = Faker::Name.name
   Category.create!(name: name,
-              activated: false,)
+          activated: "deactivated")
 end
 
 20.times do |n|
@@ -24,7 +24,7 @@ end
   Product.create!(name: name,
   			  description: "It's so beautiful",
   			  price: 100.000,
-  			  activated: false)
+  			  activated: "deactivated")
 end
 
 20.times do |n|

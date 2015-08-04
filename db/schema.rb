@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 20150803065850) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
-    t.boolean  "activated",  limit: 1
+    t.string   "activated",  limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 20150803065850) do
   create_table "products", force: :cascade do |t|
     t.string   "name",        limit: 255
     t.float    "price",       limit: 24
-    t.boolean  "activated",   limit: 1
+    t.string   "activated",   limit: 255
     t.text     "description", limit: 65535
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false

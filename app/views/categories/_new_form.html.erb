@@ -4,8 +4,8 @@
         <div class="span3">Category Name:</div>
         <div class="span9">
             <%= f.text_field :name, placeholder: "some text value...", class: "form-control" %>
-            <% if !@category.errors[:name].empty? %>
-                <li id="name-error"><%= @category.errors[:name] %></li>
+            <% unless @category.errors[:name].empty? %>
+                <li class="validate-error"><%= @category.errors[:name] %></li>
             <% end %>
         </div>
         <div class="clear"></div>
@@ -13,11 +13,11 @@
     <div class="row-form">
         <div class="span3">Activate:</div>
         <div class="span9">
-            <%= f.select(:activated, [['choose an option...', nil], 
-                                      ['Activate', true], 
-                                      ['Deactivate', false]]) %>
+            <%= f.select(:activated, [['Activate', 'activated'], 
+                                      ['Deactivate', 'deactivated']],
+                                      include_blank: 'choose an option...') %>
             <% if !@category.errors[:activated].empty? %>
-                <li id="activated-error"><%= @category.errors[:activated] %></li>
+                <li class="validate-error"><%= @category.errors[:activated] %></li>
             <% end %>
         </div>
         <div class="clear"></div>
