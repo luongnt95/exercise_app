@@ -3,13 +3,9 @@ class ProductsController < ApplicationController
   before_action :logged_in_user
   
   def index
-  	@products = Product.all
-    @products = @products.paginate(page: params[:page], per_page: 5)
+  	@products = Product.search(params[:search]).order(sort_column + ' ' + sort_direction).paginate(page: params[:page], per_page: 5)
     @total_pages = @products.total_pages
     @current_page = @products.current_page
-  end
-
-  def show
   end
 
   def new
@@ -24,6 +20,7 @@ class ProductsController < ApplicationController
           @product.product_pictures.create(image: image)
         end
       end
+      flash[:success] = "Add product successfully"
   		redirect_to products_path
   	else
   		render 'new'
@@ -43,6 +40,7 @@ class ProductsController < ApplicationController
           @product.product_pictures.create(image: image)
         end
       end
+      flash[:success] = "Update product successfully"
       redirect_to products_path
   	else
   		render 'edit'
@@ -51,14 +49,21 @@ class ProductsController < ApplicationController
 
   def bulk_action
     commit = params[:commit]
-    if commit == 'Activate'
-      update_activates
-      redirect_to request.referrer || products_path
-    elsif commit == 'Delete'
-      delete_products
-      redirect_to request.referrer || products_path
-      
+
+    if @products = checked_products
+      if commit == 'Activate'
+        @products.each do |product|
+          product.update_attribute(:activated, "activated")
+        end
+        flash[:success] = "Activate successfully!"
+      elsif commit == 'Delete'
+        @products.each do |product|
+          product.update_attribute(:activated, "deactivated")
+        end
+        flash[:success] = "Deactivate successfully!"
+      end
     end
+    redirect_to request.referrer || products_url
   end
 
   private
@@ -67,25 +72,9 @@ class ProductsController < ApplicationController
   		params.require(:product).permit(:name, :price, :description, :picture, :activated)
   	end
 
-    def delete_products
-      if products = checked_products
-        products.each do |product|
-          product.destroy
-        end
-      end
-    end
-
-    def update_activates
-      if products = checked_products
-        products.each do |product|
-          product.update_attribute(:activated, true)
-        end
-      end
-    end
-
     def checked_products
       if params[:check_all]
-        @products = Product.all
+        @products = Product.search(params[:search]).order(sort_column + ' ' + sort_direction).paginate(page: params[:current_page], per_page: 5)
       elsif product_ids = params[:product_ids]
         @products = Product.find(product_ids)
       end

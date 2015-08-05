@@ -2,7 +2,7 @@
 	<td><%= check_box_tag "product_ids[]", product.id %></td>
 	<td><%= product.id %></td>
 	<td><%= product.name %></td>
-	<td><%= "#{product.price} VND" %></td>
+	<td><%= product.price %></td>
 	<td>
 		<% if product.activated? %>
     		<span class="text-success">Activated</span>

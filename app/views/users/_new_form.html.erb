@@ -1,17 +1,26 @@
 <%= form_for @user, html: { multipart: true } do |f| %>
     <div class="row-form">
         <div class="span3">Username:</div>
-        <div class="span9"><%= f.text_field :name, placeholder: "some text value..." %></div>
+        <div class="span9">
+            <%= f.text_field :name, placeholder: "some text value..." %>
+            <%= render 'shared/validation_error_messages', object: f.object, field: :name %>
+        </div>
         <div class="clear"></div>
     </div> 
     <div class="row-form">
         <div class="span3">Email:</div>
-        <div class="span9"><%= f.email_field :email, placeholder: "some text value..." %></div>
+        <div class="span9">
+            <%= f.email_field :email, placeholder: "some text value..." %>
+            <%= render 'shared/validation_error_messages', object: f.object, field: :email %>
+        </div>
         <div class="clear"></div>
     </div> 
     <div class="row-form">
         <div class="span3">Password:</div>
-        <div class="span9"><%= f.text_field :password, placeholder: "some text value..." %></div>
+        <div class="span9">
+            <%= f.text_field :password, placeholder: "some text value..." %>
+            <%= render 'shared/validation_error_messages', object: f.object, field: :password %>
+        </div>
         <div class="clear"></div>
     </div> 
     <div class="row-form">
@@ -22,9 +31,10 @@
     <div class="row-form">
         <div class="span3">Activate:</div>
         <div class="span9">
-            <%= f.select(:activated, [['choose an option...', nil], 
-                                      ['Activate', true], 
-                                      ['Deactivate', false]]) %>
+            <%= f.select(:activated, [['Activate', 'activated'], 
+                                      ['Deactivate', 'deactivated']],
+                                      include_blank: 'choose an option...') %>
+            <%= render 'shared/validation_error_messages', object: f.object, field: :activated %>
         </div>
         <div class="clear"></div>
     </div>                          

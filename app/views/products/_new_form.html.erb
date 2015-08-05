@@ -4,9 +4,7 @@
         <div class="span3">Product Name:</div>
         <div class="span9">
             <%= f.text_field :name, placeholder: "some text value..." %>
-            <% unless @product.errors[:name].empty? %>
-                <li class="validate-error"><%= @product.errors[:name] %></li>
-            <% end %>
+            <%= render 'shared/validation_error_messages', object: f.object, field: :name %>
         </div>
         <div class="clear"></div>
     </div> 
@@ -14,9 +12,7 @@
         <div class="span3">Price:</div>
         <div class="span9">
             <%= f.number_field :price, placeholder: "some text value..." %>
-            <% unless @product.errors[:price].empty? %>
-                <li class="validate-error"><%= @product.errors[:price] %></li>
-            <% end %>
+            <%= render 'shared/validation_error_messages', object: f.object, field: :price %>
         </div>
         <div class="clear"></div>
     </div> 
@@ -24,9 +20,7 @@
         <div class="span3">Description:</div>
         <div class="span9">
             <%= f.text_area :description, placeholder: "Textarea field placeholder..." %>
-            <% unless @product.errors[:description].empty? %>
-                <li class="validate-error"><%= @product.errors[:description] %></li>
-            <% end %>
+            <%= render 'shared/validation_error_messages', object: f.object, field: :description %>
         </div>
         <div class="clear"></div>
     </div> 
@@ -46,9 +40,7 @@
             <%= f.select(:activated, [['Activate', 'activated'], 
                                       ['Deactivate', 'deactivated']],
                                        include_blank: 'choose an option...') %>
-            <% unless @product.errors[:activated].empty? %>
-                <li class="validate-error"><%= @product.errors[:activated] %></li>
-            <% end %>
+            <%= render 'shared/validation_error_messages', object: f.object, field: :activated %>
 
         </div>
         <div class="clear"></div>

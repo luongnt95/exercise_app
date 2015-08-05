@@ -1,0 +1,10 @@
+<% if @user.avatar.exists? %>
+	<span>
+		<div class="image-render">
+			<div><%= image_tag @user.avatar.url(:thumb) %></div>
+			<div><%= link_to "Default", user_path(@user), method: :delete, data: { confirm: 'Are you sure?' } %></div>
+		</div>	
+	</span>
+<% end %>
+</br>
+<%= f.file_field :avatar, size: 19 %>

@@ -1,17 +1,22 @@
 <% provide(:type, "Products") %>
+<% provide(:path, products_path) %>
 <a href="<%= new_product_path(@product) %>" class="btn btn-add">Add Product</a>
 
 <%= form_tag bulk_action_products_path do %>
+    <%= hidden_field_tag :current_page, @current_page %>
+    <%= hidden_field_tag :search, params[:search] %>
+    <%= hidden_field_tag :direction, params[:direction] %>
+    <%= hidden_field_tag :sort, params[:sort] %>
     <table cellpadding="0" cellspacing="0" width="100%" class="table" id="tSortable_2">
         <thead>
             <tr>
                 <th><%= check_box_tag "check_all", true %></th>
-                <th width="10%" class="sorting"><a href="#">ID</a></th>
-                <th width="30%" class="sorting"><a href="#">Product Name</a></th>
-                <th width="15%" class="sorting"><a href="#">Price</a></th>
-                <th width="15%" class="sorting"><a href="#">Activate</a></th>
-                <th width="10%" class="sorting"><a href="#">Time Created</a></th>
-                <th width="10%" class="sorting"><a href="#">Time Updated</a></th>
+                <th width="10%" class="sorting"><%= sortable "id", "ID" %></th>
+                <th width="30%" class="sorting"><%= sortable "name", "Product Name" %></th>
+                <th width="15%" class="sorting"><%= sortable "price", "Price" %></th>
+                <th width="15%" class="sorting"><%= sortable "activated", "Activate" %></th>
+                <th width="10%" class="sorting"><%= sortable "created_at", "Time Created" %></th>
+                <th width="10%" class="sorting"><%= sortable "updated_at", "Time Updated" %></th>
                 <th width="10%">Action</th>
             </tr>
         </thead>

@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 20150803065850) do
     t.string   "name",                limit: 255
     t.string   "password_digest",     limit: 255
     t.string   "email",               limit: 255
-    t.boolean  "activated",           limit: 1
+    t.string   "activated",           limit: 255
     t.boolean  "admin",               limit: 1
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false

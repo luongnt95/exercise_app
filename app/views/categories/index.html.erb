@@ -1,4 +1,5 @@
 <% provide(:type, "Categories") %>
+<% provide(:path, categories_path) %>
 <a href="<%= new_category_path %>" class="btn btn-add">Add Category</a>
 
 <%= form_tag bulk_action_categories_path do %>
@@ -10,11 +11,11 @@
         <thead>
             <tr>
                 <th><%= check_box_tag "check_all", true %></th>
-                <th width="15%" class="sorting"><%= sortable "id", "ID", @current_page %></th>
-                <th width="35%" class="sorting"><%= sortable "name", "Category Name", @current_page %></th>
-                <th width="20%" class="sorting"><%= sortable "activated", "Activate", @current_page %></th>
-                <th width="10%" class="sorting"><%= sortable "created_at", "Time Created", @current_page %></th>
-                <th width="10%" class="sorting"><%= sortable "updated_at", "Time Updated", @current_page %></th>
+                <th width="15%" class="sorting"><%= sortable "id", "ID" %></th>
+                <th width="35%" class="sorting"><%= sortable "name", "Category Name" %></th>
+                <th width="20%" class="sorting"><%= sortable "activated", "Activate" %></th>
+                <th width="10%" class="sorting"><%= sortable "created_at", "Time Created" %></th>
+                <th width="10%" class="sorting"><%= sortable "updated_at", "Time Updated" %></th>
                 <th width="10%">Action</th>
             </tr>
         </thead>
@@ -22,7 +23,6 @@
             <%= render @categories %>
         </tbody>
     </table>
-
     <div class="bulk-action">
         <%= submit_tag "Activate", class: "btn btn-success" %>
         <%= submit_tag "Delete", class: "btn btn-danger" %>

@@ -614,6 +614,6 @@
     display: inline-block;
 }
 
-.validate-error {
+.validation-error {
     color: red;
 }

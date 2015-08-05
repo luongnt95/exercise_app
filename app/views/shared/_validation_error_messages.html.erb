@@ -1,0 +1,9 @@
+<% unless object.errors["#{field}"].empty? %>
+	<% object.errors["#{field}"].each do |msg| %>
+		<% if "#{field}" == "activated" %>
+			<li class="validation-error"><%= "This option #{msg}" %></li>
+		<% else %>
+			<li class="validation-error"><%= "#{field} #{msg}" %></li>
+		<% end %>
+	<% end %>
+<% end %>

@@ -8,7 +8,7 @@
 
 User.create!(name:  "luong",
              email: "luong@gmail.com",
-             activated: true,
+             activated: "activated",
              admin: true,
              password:              "123456",
              password_confirmation: "123456")
@@ -35,6 +35,6 @@ end
               email: email,
               password:              password,
               password_confirmation: password,
-              activated: false,
+              activated: "deactivated",
               admin: false)
 end

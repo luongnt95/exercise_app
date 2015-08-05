@@ -4,9 +4,7 @@
         <div class="span3">Category Name:</div>
         <div class="span9">
             <%= f.text_field :name, placeholder: "some text value..." %>
-            <% if !@category.errors[:name].empty? %>
-                <li class="validate-error"><%= @category.errors[:name] %></li>
-            <% end %>
+            <%= render 'shared/validation_error_messages', object: f.object, field: :name %>
         </div>
         <div class="clear"></div>
     </div> 
@@ -16,9 +14,7 @@
             <%= f.select(:activated, [['Activate', 'activated'], 
                                       ['Deactivate', 'deactivated']],
                                       include_blank: 'choose an option...') %>
-            <% if !@category.errors[:activated].empty? %>
-                <li class="validate-error"><%= @category.errors[:activated] %></li>
-            <% end %>
+            <%= render 'shared/validation_error_messages', object: f.object, field: :activated %>
         </div>
         <div class="clear"></div>
     </div>                          

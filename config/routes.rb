@@ -6,16 +6,22 @@ Rails.application.routes.draw do
   # get "*path"              => 'sessions#new'
   # get "*path", :to => "application#routing_error"
 
-  resources :users
   resources :product_pictures, only: [:destroy]
 
-  resources :categories do
+
+  resources :users, except: [:show] do
+    collection do
+      post 'bulk_action'
+    end
+  end
+
+  resources :categories, except: [:show] do
   	collection do
   		post 'bulk_action'
   	end
   end
 
-  resources :products do
+  resources :products, except: [:show] do
     collection do
       post 'bulk_action'
     end

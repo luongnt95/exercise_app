@@ -1,11 +1,12 @@
-<% @pictures.each do |pic| %>
-	<span>
-		<div class="image-render">
-			<div><%= image_tag pic.image.url(:thumb) %></div>
-			<div><%= link_to "Delete", product_picture_path(pic), method: :delete %></div>
-		</div>
-	</span>
-
+<% if @pictures %>
+	<% @pictures.each do |pic| %>
+		<span>
+			<div class="image-render">
+				<div><%= image_tag pic.image.url(:thumb) %></div>
+				<div><%= link_to "Delete", product_picture_path(pic), method: :delete, data: { confirm: 'Are you sure?'} %></div>
+			</div>
+		</span>
+	<% end %>
 <% end %>
 <br/>
 <%= file_field_tag "images[]", type: :file, multiple: true %>

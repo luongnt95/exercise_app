@@ -6,14 +6,27 @@ class User < ActiveRecord::Base
 	validates :email, presence: true, length: { maximum: 255 },
 									  format: { with: VALID_EMAIL_REGEX }
 
-	validates :activated, inclusion: { :in => [true, false] }
+	validates :activated, presence: true, inclusion: { in: ['activated', 'deactivated'] }
 
 	has_secure_password
-	validates :password, presence: true, length: { minimum: 6 }
+	validates :password, length: { minimum: 6 }, allow_nil: true
 
 	has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }, 
-					  :default_url => "/images/:style/missing.png"
+					  :default_url => "/images/thumb/defalt_thumb/:style.jpg"
 	do_not_validate_attachment_file_type :avatar
+
+	def activated?
+		return true if self.activated == "activated"
+		return false
+	end
+
+	def self.search(search)
+		if search
+			where('id LIKE ? or name LIKE ? or activated LIKE ?', "%#{search}%", "%#{search}%", "%#{search}%")
+		else
+			User.all
+		end
+	end
 
 	def User.digest(string)
 		cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
