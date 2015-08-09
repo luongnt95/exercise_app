@@ -1,7 +1,8 @@
+<% provide(:submit_btn, "Create") %>
 <div class="content">
     <div class="breadLine">
         <ul class="breadcrumb">
-            <li><a href="list-users.html">List Users</a> <span class="divider">></span></li>
+            <li><a href="<%= users_path %>">List Users</a> <span class="divider">></span></li>
             <li class="active">Add</li>
         </ul>
     </div>
@@ -14,7 +15,7 @@
                     <div class="clear"></div>
                 </div>
                 <div class="block-fluid">
-                    <%= render 'users/new_form' %>
+                    <%= render 'users/form' %>
                     <div class="clear"></div>
                 </div>
             </div>

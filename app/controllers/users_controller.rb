@@ -1,11 +1,7 @@
 class UsersController < ApplicationController
-
-	before_action :logged_in_user
 	
 	def index
-		@users = User.search(params[:search]).order(sort_column + ' ' + sort_direction).paginate(page: params[:page], per_page: 5)
-		@total_pages = @users.total_pages
-		@current_page = @users.current_page
+		@users = Searcher.new(params).run
 	end
 
 	def new
@@ -45,22 +41,7 @@ class UsersController < ApplicationController
 	end
 
 	def bulk_action
-		commit = params[:commit]
-		if @users = checked_users
-			if commit == 'Activate'
-				@users.each do |user|
-					user.update_attribute(:activated, "activated")
-					
-				end
-
-				flash[:success] = "Activate successfully!"
-			elsif commit == 'Delete'
-				@users.each do |user|
-					user.update_attribute(:activated, "deactivated")
-				end
-				flash[:success] = "Deactivate successfully!"
-			end
-		end
+		BulkAction.new(params).run
 		redirect_to request.referrer || users_url
 	end
 
@@ -68,13 +49,5 @@ class UsersController < ApplicationController
 
 		def user_params
 			params.require(:user).permit(:name, :email, :password, :avatar, :activated)
-		end
-
-		def checked_users
-			if params[:check_all]
-				@users = User.search(params[:search]).order(sort_column + ' ' + sort_direction).paginate(page: params[:current_page], per_page: 5)
-			elsif user_ids = params[:user_ids]
-				@users = User.find(user_ids)
-			end
 		end
 end

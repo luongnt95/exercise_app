@@ -617,3 +617,8 @@
 .validation-error {
     color: red;
 }
+
+.flash {
+    text-align: center;
+    font-size: 14px;
+}

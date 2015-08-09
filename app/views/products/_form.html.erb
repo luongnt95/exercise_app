@@ -1,0 +1,55 @@
+<%= form_for @product, html: { multipart: true } do |f| %>
+    <div class="row-form">
+        <div class="span3">Product Name:</div>
+        <div class="span9">
+            <%= f.text_field :name, placeholder: "some text value..." %>
+            <%= render 'shared/validation_error_messages', object: f.object, field: :name %>
+        </div>
+        <div class="clear"></div>
+    </div> 
+    <div class="row-form">
+        <div class="span3">Price:</div>
+        <div class="span9">
+            <%= f.number_field :price, placeholder: "some text value..." %>
+            <%= render 'shared/validation_error_messages', object: f.object, field: :price %>
+        </div>
+        <div class="clear"></div>
+    </div> 
+    <div class="row-form">
+        <div class="span3">Description:</div>
+        <div class="span9">
+            <%= f.text_area :description, placeholder: "Textarea field placeholder..." %>
+            <%= render 'shared/validation_error_messages', object: f.object, field: :description %>
+        </div>
+        <div class="clear"></div>
+    </div> 
+    <div class="row-form">
+        <div class="span3">Upload Image:</div>
+        <div class="span9">
+            <% if params[:action] == 'edit' || params[:action] == 'update' %>
+                <%= render 'products/picture' %>
+            <% end %>
+            </br>
+            <%= file_field_tag "images[]", type: :file, multiple: true %>
+          
+            <% @product.product_pictures.each do |pic| %>
+                <%= render 'shared/validation_error_messages', object: pic, field: :image %>
+            <% end %>
+        </div>
+        <div class="clear"></div>
+    </div> 
+    <div class="row-form">
+        <div class="span3">Activate:</div>
+        <div class="span9">
+            <%= f.select(:activated, [['Activate', 'activated'], 
+                                      ['Deactivate', 'deactivated']],
+                                       include_blank: 'choose an option...') %>
+            <%= render 'shared/validation_error_messages', object: f.object, field: :activated %>
+        </div>
+        <div class="clear"></div>
+    </div>                          
+    <div class="row-form">
+        <%= f.submit yield(:submit_btn), class: "btn btn-success" %>
+        <div class="clear"></div>
+    </div>
+<% end %>

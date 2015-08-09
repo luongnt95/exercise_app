@@ -1,11 +1,7 @@
 class ProductsController < ApplicationController
-
-  before_action :logged_in_user
   
   def index
-  	@products = Product.search(params[:search]).order(sort_column + ' ' + sort_direction).paginate(page: params[:page], per_page: 5)
-    @total_pages = @products.total_pages
-    @current_page = @products.current_page
+  	@products = Searcher.new(params).run
   end
 
   def new
@@ -14,13 +10,8 @@ class ProductsController < ApplicationController
 
   def create
   	@product = Product.new(product_params)
-  	if @product.save
-      if images = params[:images]
-        images.each do |image|
-          @product.product_pictures.create(image: image)
-        end
-      end
-      flash[:success] = "Add product successfully"
+    if attributes_valid?
+      @product.save
   		redirect_to products_path
   	else
   		render 'new'
@@ -33,36 +24,21 @@ class ProductsController < ApplicationController
   end
 
   def update
-  	@product = Product.find(params[:id])
-  	if @product.update_attributes(product_params)
-  		if images = params[:images]
-        images.each do |image|
-          @product.product_pictures.create(image: image)
-        end
+    @product = Product.new(product_params)
+    if images_valid? && @product.valid?
+      @product = Product.find(params[:id])
+      @product.update_attributes(product_params)
+      params[:images].each do |image|
+        @product.product_pictures.create(image: image)
       end
-      flash[:success] = "Update product successfully"
       redirect_to products_path
-  	else
-  		render 'edit'
-  	end
+    else
+      render 'edit'
+    end
   end
 
   def bulk_action
-    commit = params[:commit]
-
-    if @products = checked_products
-      if commit == 'Activate'
-        @products.each do |product|
-          product.update_attribute(:activated, "activated")
-        end
-        flash[:success] = "Activate successfully!"
-      elsif commit == 'Delete'
-        @products.each do |product|
-          product.update_attribute(:activated, "deactivated")
-        end
-        flash[:success] = "Deactivate successfully!"
-      end
-    end
+    BulkAction.new(params).run
     redirect_to request.referrer || products_url
   end
 
@@ -72,11 +48,20 @@ class ProductsController < ApplicationController
   		params.require(:product).permit(:name, :price, :description, :picture, :activated)
   	end
 
-    def checked_products
-      if params[:check_all]
-        @products = Product.search(params[:search]).order(sort_column + ' ' + sort_direction).paginate(page: params[:current_page], per_page: 5)
-      elsif product_ids = params[:product_ids]
-        @products = Product.find(product_ids)
+    def images_valid?
+      check = true
+      if images = params[:images]
+        images.each do |image|
+          check = false unless @product.product_pictures.build(image: image).valid?
+        end
       end
+      check
+    end
+
+    def attributes_valid?
+      check = true
+      check = false unless @product.valid?
+      check = false unless images_valid?
+      check
     end
 end

@@ -1,9 +1,9 @@
 <% provide(:type, "Products") %>
-<% provide(:path, products_path) %>
+<% provide(:search_path, products_path) %>
 <a href="<%= new_product_path(@product) %>" class="btn btn-add">Add Product</a>
 
 <%= form_tag bulk_action_products_path do %>
-    <%= hidden_field_tag :current_page, @current_page %>
+    <%= hidden_field_tag :page, params[:page] %>
     <%= hidden_field_tag :search, params[:search] %>
     <%= hidden_field_tag :direction, params[:direction] %>
     <%= hidden_field_tag :sort, params[:sort] %>
@@ -29,4 +29,6 @@
         <%= submit_tag "Delete", class: "btn btn-danger" %>
     </div><!-- /bulk-action-->
 <% end %>
-<%= render 'layouts/pagination', object: @products %>
+<div class="dataTables_paginate">
+    <%= pagination_links @products %>
+</div>

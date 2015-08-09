@@ -3,8 +3,6 @@ Rails.application.routes.draw do
   root               'sessions#new'
   post   'login'  => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
-  # get "*path"              => 'sessions#new'
-  # get "*path", :to => "application#routing_error"
 
   resources :product_pictures, only: [:destroy]
 

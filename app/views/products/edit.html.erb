@@ -1,37 +1,25 @@
+<% provide(:submit_btn, "Update") %>
 <div class="content">
-
-
     <div class="breadLine">
-
         <ul class="breadcrumb">
-            <li><a href="list-products.html">List Products</a> <span class="divider">></span></li>
+            <li><a href="<%= products_path %>">List Products</a> <span class="divider">></span></li>
             <li class="active">Edit</li>
         </ul>
-
     </div>
-
     <div class="workplace">
-
         <div class="row-fluid">
-
             <div class="span12">
                 <div class="head">
                     <div class="isw-grid"></div>
                     <h1>Products Management</h1>
-
                     <div class="clear"></div>
                 </div>
                 <div class="block-fluid">
-
-                    <%= render 'products/edit_form' %>
-
+                    <%= render 'products/form' %>
                     <div class="clear"></div>
                 </div>
             </div>
-
         </div>
         <div class="dr"><span></span></div>
-
     </div>
-
 </div>

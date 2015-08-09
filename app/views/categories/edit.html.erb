@@ -1,8 +1,9 @@
+<% provide(:submit_btn, "Update") %>
 <div class="content">
     <%= render 'shared/flash' %>
     <div class="breadLine">
         <ul class="breadcrumb">
-            <li><a href="list-categories.html">List Categories</a> <span class="divider">></span></li>
+            <li><a href="<%= categories_path %>">List Categories</a> <span class="divider">></span></li>
             <li class="active">Edit</li>
         </ul>
     </div>
@@ -15,7 +16,7 @@
                     <div class="clear"></div>
                 </div>
                 <div class="block-fluid">
-                    <%= render 'categories/edit_form' %>
+                    <%= render 'categories/form' %>
                     <div class="clear"></div>
                 </div>
             </div>

@@ -1,37 +1,25 @@
+<% provide(:submit_btn, "Update") %>
 <div class="content">
-
-
     <div class="breadLine">
-
         <ul class="breadcrumb">
-            <li><a href="list-users.html">List Users</a> <span class="divider">></span></li>
+            <li><a href="<%= users_path %>">List Users</a> <span class="divider">></span></li>
             <li class="active">Edit</li>
         </ul>
-
     </div>
-
     <div class="workplace">
-
         <div class="row-fluid">
-
             <div class="span12">
                 <div class="head">
                     <div class="isw-grid"></div>
                     <h1>Users Management</h1>
-
                     <div class="clear"></div>
                 </div>
-                <div class="block-fluid">
-                    
-                    <%= render 'users/edit_form' %>
-
+                <div class="block-fluid"> 
+                    <%= render 'users/form' %>
                     <div class="clear"></div>
                 </div>
             </div>
-
         </div>
         <div class="dr"><span></span></div>
-
     </div>
-
 </div>

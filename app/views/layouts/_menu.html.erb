@@ -3,16 +3,20 @@
     <div class="breadLine">
         <div class="arrow"></div>
         <div class="adminControl active">
-            Hi, Ta Quoc Vuong
+            Hi, <%= current_user.name %>
         </div>
     </div>
 
     <div class="admin">
-        <div class="image">
+       <!--  <div class="image">
             <img src="/assets/users/avatar.jpg" class="img-polaroid"/>
+        </div> -->
+        <div class="image">
+            <%= image_tag current_user.avatar.url %>
         </div>
         <ul class="control">
-            <li><span class="icon-cog"></span> <a href="edit-user.html">Update Profile</a></li>
+            <!-- <li><span class="icon-cog"></span> <a href="edit-user.html">Update Profile</a></li> -->
+            <li><span class="icon-cog"></span><%= link_to "Update Profile", edit_user_path(1) %></li>
             <li><span class="icon-share-alt"></span> <%= link_to("Log out", logout_path, method: :delete) %></li>
         </ul>
     </div>

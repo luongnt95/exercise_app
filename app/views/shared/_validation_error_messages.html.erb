@@ -2,6 +2,10 @@
 	<% object.errors["#{field}"].each do |msg| %>
 		<% if "#{field}" == "activated" %>
 			<li class="validation-error"><%= "This option #{msg}" %></li>
+		<% elsif "#{field}" == "image" %>
+			<li class="validation-error"><%= "#{object.image_file_name} #{msg}" %></li>
+		<% elsif "#{field}" == "avatar" %>
+			<li class="validation-error"><%= "#{object.avatar_file_name} #{msg}" %></li>
 		<% else %>
 			<li class="validation-error"><%= "#{field} #{msg}" %></li>
 		<% end %>
