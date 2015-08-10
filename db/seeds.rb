@@ -20,10 +20,11 @@ User.create!(name:  "luong",
 end
 
 20.times do |n|
-  name  = Faker::Name.name
+  name  = Faker::Commerce.product_name
+  price = Faker::Commerce.price
   Product.create!(name: name,
   			  description: "It's so beautiful",
-  			  price: 100.000,
+  			  price: price,
   			  activated: "deactivated")
 end
 

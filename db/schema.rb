@@ -33,11 +33,11 @@ ActiveRecord::Schema.define(version: 20150803065850) do
 
   create_table "products", force: :cascade do |t|
     t.string   "name",        limit: 255
-    t.float    "price",       limit: 24
+    t.decimal  "price",                     precision: 10, scale: 1
     t.string   "activated",   limit: 255
     t.text     "description", limit: 65535
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
   end
 
   create_table "sessions", force: :cascade do |t|

@@ -1,15 +1,17 @@
-<tr>
-    <td><%= check_box_tag "ids[]", user.id %></td>
-    <td><%= user.id %></td>
-    <td><%= user.name %></td>
-    <td>
-    	<% if user.activated? %>
-    		<span class="text-success">Activated</span>
-    	<% else %>
-    		<span class="text-error">Deactivated</span>
-    	<% end %>
-    </td>
-    <td><%= user.created_at %></td>
-    <td><%= user.updated_at %></td>
-    <td><a href="<%= edit_user_path(user) %>" class="btn btn-info">Edit</a></td>
-</tr>
+<% unless user.admin? %>
+    <tr>
+        <td><%= check_box_tag "ids[]", user.id %></td>
+        <td><%= user.id %></td>
+        <td><%= user.name %></td>
+        <td>
+        	<% if user.activated? %>
+        		<span class="text-success">Activated</span>
+        	<% else %>
+        		<span class="text-error">Deactivated</span>
+        	<% end %> 
+        </td>
+        <td><%= user.created_at %></td>
+        <td><%= user.updated_at %></td>
+        <td><a href="<%= edit_user_path(user) %>" class="btn btn-info">Edit</a></td>
+    </tr>
+<% end %>

@@ -12,6 +12,7 @@ class ProductsController < ApplicationController
   	@product = Product.new(product_params)
     if attributes_valid?
       @product.save
+      flash[:success] = "Add product successfully!"
   		redirect_to products_path
   	else
   		render 'new'
@@ -24,13 +25,11 @@ class ProductsController < ApplicationController
   end
 
   def update
-    @product = Product.new(product_params)
-    if images_valid? && @product.valid?
-      @product = Product.find(params[:id])
-      @product.update_attributes(product_params)
-      params[:images].each do |image|
-        @product.product_pictures.create(image: image)
-      end
+    @product = Product.find(params[:id])
+    @product.assign_attributes(product_params)
+    if attributes_valid?
+      @product.save
+      flash[:success] = "Update product successfully!"
       redirect_to products_path
     else
       render 'edit'
@@ -39,6 +38,7 @@ class ProductsController < ApplicationController
 
   def bulk_action
     BulkAction.new(params).run
+    flash[:success] = "Successfully!"
     redirect_to request.referrer || products_url
   end
 

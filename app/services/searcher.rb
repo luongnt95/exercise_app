@@ -11,11 +11,10 @@ class Searcher
 
 		unless str.nil?
 			unless str.scan(/[0-9]/).join == ""
-				str.gsub!(/\s+/, "")
-				str = str.scan(/[0-9]/).join
+				str = str.gsub(/\s+/, "")
 			else
-				str.gsub!(/\s+/, " ")
-				str.strip!
+				str = str.gsub(/\s+/, " ")
+				str = str.strip
 			end
 		end
 

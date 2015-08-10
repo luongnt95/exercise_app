@@ -1,12 +1,13 @@
 class Product < ActiveRecord::Base
 
 	has_many :product_pictures
-	VALID_TEXT_REGEX = /\A[a-zA-Z0-9\s+]+\z/
+	VALID_TEXT_REGEX = /\A[a-zA-Z0-9\s+\.]+\z/
 	validates :name, presence: true, length: { minimum: 2, maximum: 50 },
-									 format: { with: VALID_TEXT_REGEX}
-	validates :price, presence: true
+									 format: { with: VALID_TEXT_REGEX }
+	validates :price, presence: true, numericality: { greater_than_or_equal_to: 0 }
 	validates :description, presence: true
 	validates :activated, inclusion: { in: ["activated", "deactivated"] }
+
 
 	def activated?
 		return true if self.activated == "activated"

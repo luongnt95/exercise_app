@@ -10,9 +10,9 @@ class ApplicationController < ActionController::Base
     raise ActionController::RoutingError.new("No route matches #{params[:unmatched_route]}")
   end
 
-  #rescue_from ActiveRecord::RecordNotFound, with: :render_404 
-  #rescue_from ActionController::RoutingError, :with => :render_404
-  #rescue_from Exception, with: :render_404
+  # rescue_from ActiveRecord::RecordNotFound, with: :render_404
+  # rescue_from ActionController::RoutingError, :with => :render_404
+  # rescue_from Exception, with: :render_404
 
   def sort_column
     GetModel.new(params[:controller]).run.column_names.include?(params[:sort]) ? params[:sort] : "id"

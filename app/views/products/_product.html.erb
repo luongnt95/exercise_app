@@ -2,7 +2,7 @@
 	<td><%= check_box_tag "ids[]", product.id %></td>
 	<td><%= product.id %></td>
 	<td><%= product.name %></td>
-	<td><%= product.price %></td>
+	<td><%= number_to_currency(product.price, unit: "VND", format: "%n %u") %></td>
 	<td>
 		<% if product.activated? %>
     		<span class="text-success">Activated</span>

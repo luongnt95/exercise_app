@@ -11,6 +11,7 @@ class UsersController < ApplicationController
 	def create
 		@user = User.new(user_params)
 		if @user.save
+			flash[:success] = "Add user successfully!"
 			redirect_to users_url
 		else
 			render 'new'
@@ -35,13 +36,15 @@ class UsersController < ApplicationController
 		@user = User.find(params[:id])
 		
 		if @user.avatar.exists?
-			@user.avatar.destroy
+			@user.save if @user.avatar.destroy
+			flash[:success] = "Avatar has been deleted!"
 		end
 		redirect_to request.referrer
 	end
 
 	def bulk_action
 		BulkAction.new(params).run
+		flash[:success] = "Successfully!"
 		redirect_to request.referrer || users_url
 	end
 

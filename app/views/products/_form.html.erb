@@ -10,7 +10,7 @@
     <div class="row-form">
         <div class="span3">Price:</div>
         <div class="span9">
-            <%= f.number_field :price, placeholder: "some text value..." %>
+            <%= f.number_field :price, step: 0.1, placeholder: "some text value..." %>
             <%= render 'shared/validation_error_messages', object: f.object, field: :price %>
         </div>
         <div class="clear"></div>

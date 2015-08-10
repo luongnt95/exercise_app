@@ -1,10 +1,9 @@
 <div class="row-fluid">
   <div class="span12 search">
-
     <%= form_tag yield(:search_path), method: :get do %>
-                  
       <%= hidden_field_tag :direction, params[:direction] %>
-                  <%= hidden_field_tag :sort, params[:sort] %>
+      <%= hidden_field_tag :sort, params[:sort] %>
+      
       <%= text_field_tag :search, params[:search], placeholder: "Some text for search...", class: "span11" %>
 
       <%= button_tag "Search", type: :submit, class: "btn span1" %>
