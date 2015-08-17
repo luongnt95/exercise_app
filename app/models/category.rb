@@ -1,6 +1,6 @@
 class Category < ActiveRecord::Base
 
-	VALID_TEXT_REGEX = /\A[a-zA-Z0-9\s+\.]+\z/
+	VALID_TEXT_REGEX = /\A[a-zA-Z0-9\s+\.\-]+\z/
 	validates :name, presence: true, length: { minimum: 2, maximum: 50 },
 									 format: { with: VALID_TEXT_REGEX }
 

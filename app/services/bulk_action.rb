@@ -7,18 +7,17 @@ class BulkAction
 	end
 
 	def run
-		if @params[:commit] == 'Activate'
-			if collection = checked_items
+		if collection = checked_items
+			if @params[:commit] == 'Activate'
 				collection.each do |item|
 					item.update_attribute(:activated, "activated")
 				end
-			end
-		elsif @params[:commit] == 'Delete'
-			if collection = checked_items
+			elsif @params[:commit] == 'Delete'
 				collection.each do |item|
 					item.update_attribute(:activated, "deactivated")
 				end
 			end
+			return true
 		end
 	end
 

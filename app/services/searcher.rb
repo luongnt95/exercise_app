@@ -20,6 +20,7 @@ class Searcher
 
 		@collection = @All.search(str)
 		@collection = @collection.order(@params[:sort] + ' ' + @params[:direction]) if @params[:sort]
+		@params[:page] = 1 if @params[:page].nil?
 		@collection = @collection.paginate(page: @params[:page], per_page: PER_PAGE)
 	end
 

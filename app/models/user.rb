@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
 	attr_accessor :remember_token
-	VALID_TEXT_REGEX = /\A[a-zA-Z0-9\s+\.]+\z/
+	VALID_TEXT_REGEX = /\A[a-zA-Z0-9\s+\.\-]+\z/
 	validates :name, presence: true, length: { minimum: 2, maximum: 50 },
 									 format: { with: VALID_TEXT_REGEX}
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -16,13 +16,13 @@ class User < ActiveRecord::Base
 					  :default_url => "/images/thumb/defalt_thumb/:style.jpg"
 	validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
-	validate :avatar_duplication
+	#validate :avatar_duplication
 
-	def avatar_duplication
-		if user = User.find_by(id: self.id)
-			errors.add(:avatar, "is already there!") if user.avatar_file_name == self.avatar_file_name
-		end
-	end
+	#def avatar_duplication
+	#	if user = User.find_by(id: self.id)
+	#		errors.add(:avatar, "is already there!") if user.avatar_file_name == self.avatar_file_name
+	#	end
+	#end
 
 	def activated?
 		return true if self.activated == "activated"

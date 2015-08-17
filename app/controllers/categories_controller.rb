@@ -39,8 +39,7 @@ class CategoriesController < ApplicationController
 	end
 
 	def bulk_action
-		BulkAction.new(params).run
-		flash[:success] = "Successfully!"
+		flash[:success] = "Successfully!" if BulkAction.new(params).run
 		redirect_to request.referrer || categories_url
 	end
 

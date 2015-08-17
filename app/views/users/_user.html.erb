@@ -1,5 +1,5 @@
 <% unless user.admin? %>
-    <tr>
+    <tr id="item-row-<%= user.id %>">
         <td><%= check_box_tag "ids[]", user.id %></td>
         <td><%= user.id %></td>
         <td><%= user.name %></td>
