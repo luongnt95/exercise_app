@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.feature "Category", type: :feature do
 	before :each do
+		FactoryGirl.reload unless FactoryGirl.factories.blank?
 		@category1 = FactoryGirl.create(:category, id: 1)
 		@category2 = FactoryGirl.create(:category, id: 2)
 		@category3 = FactoryGirl.create(:category, id: 3, activated: "activated")
@@ -167,6 +168,30 @@ RSpec.feature "Category", type: :feature do
 				click_link 'Activate'
 				click_link 'Activate'
 				@category4.name.should appear_before(@category1.name)
+			end
+		end
+	end
+
+	feature "search" do
+		context "with normal format of search's input" do
+			it "should show only category3's info in search results" do
+				fill_in 'search', with: "3"
+				click_button 'Search'
+				page.should have_content @category3.name
+				page.should_not have_content @category1.name
+				page.should_not have_content @category2.name
+				page.should_not have_content @category4.name
+			end
+		end
+
+		context "with special format of search's input" do
+			it "should show only category3's info in search results" do
+				fill_in 'search', with: "  3  "
+				click_button 'Search'
+				page.should have_content @category3.name
+				page.should_not have_content @category1.name
+				page.should_not have_content @category2.name
+				page.should_not have_content @category4.name
 			end
 		end
 	end

@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.feature "Product", type: :feature do
 	before :each do
+		FactoryGirl.reload unless FactoryGirl.factories.blank?
 		@product1 = FactoryGirl.create(:product, id: 1)
 		@product2 = FactoryGirl.create(:product, id: 2)
 		@product3 = FactoryGirl.create(:product, id: 3, activated: "activated")
@@ -174,6 +175,30 @@ RSpec.feature "Product", type: :feature do
 				click_link 'Activate'
 				click_link 'Activate'
 				@product4.name.should appear_before(@product1.name)
+			end
+		end
+	end
+
+	feature "search" do
+		context "with normal format of search's input" do
+			it "should show only product3's info in search results" do
+				fill_in 'search', with: "3"
+				click_button 'Search'
+				page.should have_content @product3.name
+				page.should_not have_content @product1.name
+				page.should_not have_content @product2.name
+				page.should_not have_content @product4.name
+			end
+		end
+
+		context "with special format of search's input" do
+			it "should show only product3's info in search results" do
+				fill_in 'search', with: "  3  "
+				click_button 'Search'
+				page.should have_content @product3.name
+				page.should_not have_content @product1.name
+				page.should_not have_content @product2.name
+				page.should_not have_content @product4.name
 			end
 		end
 	end

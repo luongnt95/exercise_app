@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.feature "User", type: :feature do
 	before :each do
+		FactoryGirl.reload unless FactoryGirl.factories.blank?
 		@user1 = FactoryGirl.create(:user, id: 1, name: "user1", admin: false)
 		@user2 = FactoryGirl.create(:user, id: 2, name: "user2", admin: false)
 		@user3 = FactoryGirl.create(:user, id: 3, name: "user3", activated: "activated", admin: false)
@@ -173,6 +174,30 @@ RSpec.feature "User", type: :feature do
 				click_link 'Activate'
 				click_link 'Activate'
 				@user4.name.should appear_before(@user1.name)
+			end
+		end
+	end
+
+	feature "search" do
+		context "with normal format of search's input" do
+			it "should show only user3's info in search results" do
+				fill_in 'search', with: "3"
+				click_button 'Search'
+				page.should have_content @user3.name
+				page.should_not have_content @user1.name
+				page.should_not have_content @user2.name
+				page.should_not have_content @user4.name
+			end
+		end
+
+		context "with special format of search's input" do
+			it "should show only user3's info in search results" do
+				fill_in 'search', with: "  3  "
+				click_button 'Search'
+				page.should have_content @user3.name
+				page.should_not have_content @user1.name
+				page.should_not have_content @user2.name
+				page.should_not have_content @user4.name
 			end
 		end
 	end

@@ -14,7 +14,7 @@ User.create!(name:  "luong",
              password_confirmation: "123456")
 
 20.times do |n|
-  name  = Faker::Name.name
+  name  = Faker::Commerce.product_name
   Category.create!(name: name,
           activated: "deactivated")
 end
@@ -29,7 +29,7 @@ end
 end
 
 20.times do |n|
-  name  = Faker::Name.name
+  name  = Faker::Commerce.product_name
   email = "example-#{n+1}@railstutorial.org"
   password = "password"
   User.create!(name: name,

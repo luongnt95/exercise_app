@@ -4,7 +4,7 @@ RSpec.describe UsersController, type: :controller do
 
   before :each do
     user = FactoryGirl.create(:user, name: "luong", email: "luong@gmail.com", activated: "activated", admin: true)
-	log_in user
+	  log_in user
   end
   
 

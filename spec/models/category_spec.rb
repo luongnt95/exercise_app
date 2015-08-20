@@ -37,13 +37,14 @@ RSpec.describe Category, type: :model do
 		FactoryGirl.build(:category, activated: "abc").should_not be_valid
 	end
 
+	before :each do
+		@category1 = FactoryGirl.create(:category, id: 1, name: "category1", activated: "activated")
+		@category2 = FactoryGirl.create(:category, id: 2, name: "category2")
+		@category3 = FactoryGirl.create(:category, id: 3, name: "category3", activated: "activated")
+		@category4 = FactoryGirl.create(:category, id: 4, name: "category4")
+	end
+
 	describe "filter category by letters" do
-		before :each do
-			@category1 = FactoryGirl.create(:category, id: 1, name: "category1", activated: "activated")
-			@category2 = FactoryGirl.create(:category, id: 2, name: "category2")
-			@category3 = FactoryGirl.create(:category, id: 3, name: "category3", activated: "activated")
-			@category4 = FactoryGirl.create(:category, id: 4, name: "category4")
-		end
 		describe "filter category by id" do
 			context "matching id" do
 				it "returns a result that matches" do
